@@ -3,7 +3,6 @@
 
   export let username_list;
 
-  // export let users;
   export let mode;
 
   let className = ''
@@ -29,7 +28,6 @@
       console.log(`fetching data for user:${username}`)
       const response = await fetch(endpoint(username));
       const data = await response.json();
-      console.log(data);
       user_data.push(data);
       user_data = user_data;
     })

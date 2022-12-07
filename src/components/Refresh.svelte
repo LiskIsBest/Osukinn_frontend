@@ -1,8 +1,5 @@
 <script>
   export let username_list;
-
-  console.log(username_list)
-
   export let mode;
 
   username_list = username_list.toString();

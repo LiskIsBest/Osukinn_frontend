@@ -16,10 +16,6 @@
 
   let username_list = usernames.split(",");
   username_list = username_list.map(username => username.trim());
-
-  console.log(username_list);
-  console.log(usernames, mode);
-  console.log(username_list)
 </script>
 
 <main>
