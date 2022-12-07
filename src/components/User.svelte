@@ -1,8 +1,9 @@
 <script>
-  import { loop_guard } from "svelte/internal";
+  import {onMount} from "svelte";
 
+  export let username_list;
 
-  export let users;
+  // export let users;
   export let mode;
 
   let className = ''
@@ -17,9 +18,26 @@
     return numWithCommas
   }
 
+  function endpoint(username){
+    return `${location.origin}/users/${username}`
+  }
+
+  let user_data = [];
+
+  onMount(async function(){
+    username_list.forEach(async (username)=>{
+      console.log(`fetching data for user:${username}`)
+      const response = await fetch(endpoint(username));
+      const data = await response.json();
+      console.log(data);
+      user_data.push(data);
+      user_data = user_data;
+    })
+  })
+
 </script>
 
-{#each users as user}
+{#each user_data as user}
 <div class="{className}">
   <h2 class="text-center">{user.username}</h2>
   <a href="https://osu.ppy.sh/users/{user._id}" target="_blank" rel="noreferrer">

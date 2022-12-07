@@ -1,48 +1,28 @@
 <script>
-  import {onMount} from "svelte";
+  import User from "./User.svelte";
+  import Refresh from "./Refresh.svelte";
 
-  import User from "./User.svelte"
-
-  export const queryString = window.location.search;
-  export const urlParams = new URLSearchParams(queryString);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   let usernames = urlParams.get("usernames");
   let mode = urlParams.get("mode");
   
+  if(usernames == null || usernames == ""){
+    usernames = "None";
+  }
+  if(mode == null || usernames == ""){
+    mode="mania";
+  }
+
   let username_list = usernames.split(",");
   username_list = username_list.map(username => username.trim());
 
   console.log(username_list);
   console.log(usernames, mode);
-
-  function endpoint(username){
-    return `https://www.osukinn.com/users/${username}`
-  }
-
-  let user_data = [];
-
-  onMount(async function(){
-    username_list.forEach(async (username)=>{
-      console.log(`fetching data for user:${username}`)
-      const response = await fetch(endpoint(username));
-      const data = await response.json();
-      console.log(data);
-      user_data.push(data);
-      user_data = user_data;
-    })
-  })
-
-  console.log(user_data)
+  console.log(username_list)
 </script>
 
 <main>
-
-<head>
-  <title>OsuKinn</title>
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-</head>
 
 <body>
 
@@ -65,16 +45,22 @@
 
   <div class="d-flex row justify-content-center border border-secondary">
     <h1 class="text-center">User</h1>
-    <!-- {#each user_data as user, index}
-      <User class="col-md-6 col-sm-6 col-lg-3 border border-primary" user={user} mode={mode}/>
-      {/each} -->
-    <User class="col-md-6 col-sm-6 col-lg-3 border border-primary" users={user_data} mode={mode}/>
+    <User class="col-md-6 col-sm-6 col-lg-3 border border-primary" username_list={username_list} mode={mode}/>
   </div>
 
-  <div>
-    <form class="col-12 text-center" method='get' action='/update'>
-      <button>refresh users</button>
-  </form>
+  <Refresh username_list={username_list} mode={mode}/>
+
+  <div class="col-12 row d-flex">
+    <h3 class="text-center">Work in progress</h3>
+  </div>
+  <div class="col-12 row d-flex">
+    <ul class="text-center">
+      <li>Mode selector: choose which gamemode to use when showing rank.</li>
+      <li>The "all" gamemode option lists all ranks for each gamemode per player.</li>
+      <li>If any other gamemode is selected with more than one user entered, the highest ranked user will be shown above the others.</li>
+      <li>Text box: enter Osu! profile usernames seperated by commas. EX: "jakads, whitecat"</li>
+      <li>Refresh button: refreshes data for each user listed.</li>
+    </ul>
   </div>
 </body>
 
