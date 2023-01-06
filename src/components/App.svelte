@@ -53,9 +53,9 @@
     <ul class="text-center">
       <li>Mode selector: choose which gamemode to use when showing rank.</li>
       <li>The "all" gamemode option lists all ranks for each gamemode per player.</li>
-      <li>If any other gamemode is selected with more than one user entered, the highest ranked user will be shown above the others.</li>
       <li>Text box: enter Osu! profile usernames seperated by commas. EX: "jakads, whitecat"</li>
       <li>Refresh button: refreshes data for each user listed.</li>
+      <li>Github: <a href="https://github.com/LiskIsBest/Osukinn">LiskIsBest/Osukinn</a></li>
     </ul>
   </div>
 </body>
@@ -63,4 +63,9 @@
 </main>
 
 <style>
+@media only screen and (min-width: 600px){
+  #usernames{
+    width: 500px;
+  }
+}
 </style>
