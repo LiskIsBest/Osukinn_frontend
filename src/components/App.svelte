@@ -27,11 +27,11 @@
       <label for="usernames">Enter usernames (ex: username1, username2, etc..) </label> <br />
       <div class="d-inline-flex">
         <select name="mode">
+          <option selected value="all">All</option>
           <option value="mania" >Mania</option>
           <option value="osu" >Standard</option>
           <option value="taiko">Taiko</option>
           <option value="fruits">Ctb</option>
-          <option value="all">All</option>
         </select>
         <input type="hidden" id="mode">
         <input type="text" id="usernames" name="usernames"><br />
