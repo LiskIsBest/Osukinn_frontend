@@ -11,7 +11,7 @@
     usernames = "None";
   }
   if(mode == null || usernames == ""){
-    mode="mania";
+    mode="all";
   }
 
   let username_list = usernames.split(",");
